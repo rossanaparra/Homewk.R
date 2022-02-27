@@ -1,0 +1,62 @@
+
+---
+title: "R_R.B.P.A"
+author: "Rossana Parra"
+date: '2022-02-27'
+output:   
+  html_document:
+    self_contained: true
+    fig_height: 6
+    fig_width: 8
+    theme: journal
+    highlight: zenburn
+    toc: yes
+    toc_depth: 3 
+    toc_float:
+      collapsed: no
+      smooth_scrool: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### TAREA INTRODUCTORIA EN PROGRAMACIÓN EN R
+
+## Crear un identificador de nombre "ciudad" y asigne como valor el nombre de alguna ciudad
+```{r}
+ciudad <-"Quito"
+print(ciudad)
+```
+## Crear un identificador de nombre "pais_andes" y asigne como valor los nombres de los países por donde cruza la cordillera de Los Andes
+```{r}
+países_andes <- c("Argentina" , "Bolivia" , "Venezuela" , "Colombia" , "Chile" , "Ecuador" , "Perú")
+print(países_andes)
+```
+## Crear un dataframe con 12 eventos (files) y 5 variables (columnas), cada columna debe tener diferentes tipos de datos (entero, decimal, caracter, logico)
+```{r}
+datos_provincias_ecuador = data.frame(identador = seq(1:12), 
+                                Sierra = as.factor(c(rep(0, 4), rep(1, 8))), 
+                                provincias = c("Pastaza", "Orellana", "Guayas", "Napo", "Pichincha", "Imbabura", "Azuay", "Loja", "Chimborazo", "Bolívar", "Carchi", "Tungurahua"),
+                                zonarural = c(4, 4, 12, 15, 8, 6, 15, 11, 10, 7, 6, 9),
+                                dens_pobla = c(3.93, 7.44, 275.47, 10.72, 333.08, 103.29,                                                   107.63, 46.88, 87.35, 0.05, 50.52, 175.28))                                                  #Número de habitantes
+View(datos_provincias_ecuador)
+```
+
+## Cargue el dataset "DNase" e identifique su estructura. Extraiga (subset) los datos que cumplan con las condiciones de: 
+   ## 1. "conc" (concentracion) entre 0.1 y 0.2
+   ## 2. "Run" diferente a 2, "conc" mayor a 0.2 y "density" menor o igual a 1.0
+```{r}
+library(DNase)
+database <- data(DNase)
+class(DNase)
+install.packages("dplyr")
+
+library(dplyr)
+ filtro_1 = filter(DNase, conc < 0.2 & conc > 0.1)
+ View(filtro_1)
+ 
+library(dplyr)
+ filtro_2 <- filter(DNase, Run !=2 & conc > 0.2 & density <= 1)
+View(filtro_2)
+---
